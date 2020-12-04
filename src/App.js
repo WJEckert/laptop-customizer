@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import Header from './Header'
+import FeaturesList from './FeaturesList'
+import SummaryList from './SummaryList'
+import Feature from './Feature'
+import Summary from './Summary'
+import USCurrencyFormat from './USCurrencyFormat'
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes
@@ -8,10 +14,6 @@ import './App.css';
 
 // This object will allow us to
 // easily convert numbers into US dollar values
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
 
 class App extends Component {
   state = {
@@ -64,29 +66,16 @@ class App extends Component {
           </div>
         );
       });
-
       return (
-        <fieldset className="feature" key={featureHash}>
-          <legend className="feature__name">
-            <h3>{feature}</h3>
-          </legend>
-          {options}
-        </fieldset>
+        <Feature key = {feature} feature = {feature} options = {options} featureHash = {featureHash}/>
       );
     });
 
     const summary = Object.keys(this.state.selected).map((feature, idx) => {
       const featureHash = feature + '-' + idx;
       const selectedOption = this.state.selected[feature];
-
       return (
-        <div className="summary__option" key={featureHash}>
-          <div className="summary__option__label">{feature} </div>
-          <div className="summary__option__value">{selectedOption.name}</div>
-          <div className="summary__option__cost">
-            {USCurrencyFormat.format(selectedOption.cost)}
-          </div>
-        </div>
+        <Summary key = {feature} feature = {feature} featureHash = {featureHash} selectedOption = {selectedOption}/>
       );
     });
 
@@ -97,24 +86,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header>
-          <h1>ELF Computing | Laptops</h1>
-        </header>
+        <Header />
         <main>
-          <form className="main__form">
-            <h2>Customize your laptop</h2>
-            {features}
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            {summary}
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
-          </section>
+          <FeaturesList key = 'Features' features = {features}/>
+          <SummaryList key= 'Summary' summary = {summary} total = {total} />
         </main>
       </div>
     );

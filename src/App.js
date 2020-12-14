@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header'
 import FeaturesList from './FeaturesList'
 import SummaryList from './SummaryList'
-import Feature from './Feature'
-import Summary from './Summary'
-import USCurrencyFormat from './USCurrencyFormat'
-
-// Normalizes string as a slug - a string that is safe to use
-// in both URLs and html attributes
-import slugify from 'slugify';
-
+import LaptopFeatures from './LaptopFeatures'
 import './App.css';
 
 // This object will allow us to
@@ -46,38 +39,9 @@ class App extends Component {
   };
 
   render() {
-    const features = Object.keys(this.props.features).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const options = this.props.features[feature].map(item => {
-        const itemHash = slugify(JSON.stringify(item));
-        return (
-          <div key={itemHash} className="feature__item">
-            <input
-              type="radio"
-              id={itemHash}
-              className="feature__option"
-              name={slugify(feature)}
-              checked={item.name === this.state.selected[feature].name}
-              onChange={e => this.updateFeature(feature, item)}
-            />
-            <label htmlFor={itemHash} className="feature__label">
-              {item.name} ({USCurrencyFormat.format(item.cost)})
-            </label>
-          </div>
-        );
-      });
-      return (
-        <Feature key = {feature} feature = {feature} options = {options} featureHash = {featureHash}/>
-      );
-    });
+    
 
-    const summary = Object.keys(this.state.selected).map((feature, idx) => {
-      const featureHash = feature + '-' + idx;
-      const selectedOption = this.state.selected[feature];
-      return (
-        <Summary key = {feature} feature = {feature} featureHash = {featureHash} selectedOption = {selectedOption}/>
-      );
-    });
+    
 
     const total = Object.keys(this.state.selected).reduce(
       (acc, curr) => acc + this.state.selected[curr].cost,
@@ -88,8 +52,8 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <FeaturesList key = 'Features' features = {features}/>
-          <SummaryList key= 'Summary' summary = {summary} total = {total} />
+          <FeaturesList key = 'Features' LaptopFeatures = {LaptopFeatures} selected = {this.state.selected}/>
+          <SummaryList key= 'Summary' selected = {this.state.selected} total = {total} />
         </main>
       </div>
     );

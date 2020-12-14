@@ -17,7 +17,7 @@ function featureList(props) {
                 className="feature__option"
                 name={slugify(feature)}
                 checked={item.name === props.selected.name}
-                onChange={e => this.updateFeature(feature, item)}
+                onChange={e => props.updateFeature(feature, item)}
               />
               <label htmlFor={itemHash} className="feature__label">
                 {item.name} ({USCurrencyFormat.format(item.cost)})

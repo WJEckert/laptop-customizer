@@ -52,7 +52,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <main>
-          <FeaturesList key = 'Features' LaptopFeatures = {LaptopFeatures} selected = {this.state.selected}/>
+          <FeaturesList key = 'Features' LaptopFeatures = {LaptopFeatures} selected = {this.state.selected} updateFeature = {this.updateFeature}/>
           <SummaryList key= 'Summary' selected = {this.state.selected} total = {total} />
         </main>
       </div>

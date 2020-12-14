@@ -16,7 +16,7 @@ function SummaryList(props) {
         <section className="main__summary">
             <h2>Your cart</h2>
              {summary}
-            <SummaryTotal selected = {props.selected}/>
+            <SummaryTotal key = "summary total" selected = {props.selected}/>
         </section>
     )
 }

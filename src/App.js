@@ -40,20 +40,12 @@ class App extends Component {
 
   render() {
     
-
-    
-
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost,
-      0
-    );
-
     return (
       <div className="App">
         <Header />
         <main>
           <FeaturesList key = 'Features' LaptopFeatures = {LaptopFeatures} selected = {this.state.selected} updateFeature = {this.updateFeature}/>
-          <SummaryList key= 'Summary' selected = {this.state.selected} total = {total} />
+          <SummaryList key= 'Summary' selected = {this.state.selected} />
         </main>
       </div>
     );

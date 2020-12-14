@@ -3,6 +3,7 @@ import SummaryTotal from './SummaryTotal'
 import Summary from './Summary'
 
 
+
 function SummaryList(props) {
     const summary = Object.keys(props.selected).map((feature, idx) => {
         const featureHash = feature + '-' + idx;

@@ -5,6 +5,7 @@ import FeatureParts from './FeatureParts'
 import USCurrencyFormat from './USCurrencyFormat'
 
 
+
 function featureList(props) {
     const features = Object.keys(props.LaptopFeatures).map((feature, idx) => {
         const featureHash = feature + '-' + idx;
@@ -12,7 +13,7 @@ function featureList(props) {
           const itemHash = slugify(JSON.stringify(item));
           return (
            <div key={itemHash} className="feature__item">
-             <FeatureParts key = {itemHash} id = {itemHash} className ="feature_option" name = {slugify(feature)} checked = {item.name === props.selected.name}
+             <FeatureParts key = {itemHash} id = {itemHash} className ="feature_option" name = {slugify(feature)} checked = {item.name === props.selected[feature].name}
                 onChange = {e => props.updateFeature(feature,item)} />
               <label htmlFor={itemHash} className="feature__label">
                 {item.name} ({USCurrencyFormat.format(item.cost)})
